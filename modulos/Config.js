@@ -29,8 +29,8 @@ const CONFIG = {
     },
     INVERSIONES:{
       "Efectivo":0,
-      "Mercado Pago":12,
-      "Fondo de Inversion": 18
+      "Mercado Pago":6,
+      "Fondo de Inversion":12
     }
   },
   TYPE_INDEX:{

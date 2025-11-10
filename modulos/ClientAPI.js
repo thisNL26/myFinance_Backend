@@ -52,24 +52,35 @@ function addTransaction(data) {
   ];
 
 
-  console.log(hoja, targetColumn, record);
+  console.log("Hoja: " + hoja);
+  console.log("Terjet/Columna: " + targetColumn);
+  console.log("grabación: ",record);
+  
   // 5. Llamamos a la nueva función de SheetAPI
-  // SheetAPI.writeToNextEmptyRow(hoja, targetColumn, record);
+  writeToNextEmptyRow(hoja, targetColumn, record);
 }
 
 
 function prueba(){
+  const hj = "INVERSIONES";
+  const ct = "Fondo de Inversion";
   const obj = {
-    hoja: "INVERSIONES",
-    cartera: "Mercado Pago",
+    hoja: hj,
+    cartera: ct,
+    tipo: "Ingreso",
+    concepto: "APROBADO POR CHAYYANE INGRESO",
+    cantidad: 100
+  }
+  const obj2 = {
+    hoja: hj,
+    cartera: ct,
     tipo: "Egreso",
-    concepto: "Camion",
-    cantidad: 9.5
+    concepto: "APROBADO POR CHAYYANE EGRESO",
+    cantidad: 100
   }
   addTransaction(obj);
+  addTransaction(obj2);
 }
-
-
 
 
 

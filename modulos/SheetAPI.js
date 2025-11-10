@@ -25,7 +25,6 @@ function getRecords(sheetName) {
 /**
  * Escribe en un bloque de 3 columnas (Concepto, Cantidad, Fecha)
  * buscando la primera fila vacía.
- * ESTA FUNCIÓN CONTIENE TU LÓGICA ORIGINAL.
  *
  * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet - La hoja donde se va a escribir.
  * @param {number} startColumn - El número de la columna donde empieza el bloque (ej. 9).
@@ -38,10 +37,12 @@ function writeToNextEmptyRow(sheetName, startColumn, record) {
       throw new Error(`Hoja no encontrada: ${sheetName}`);
     }
 
-    let celdaY = 5; // Fila donde empiezan tus registros
+    let celdaY = 5; // Fila donde empiezan los registros
     let celdaConcepto = sheet.getRange(celdaY, startColumn);
     
-    // Tu lógica original para encontrar la fila vacía
+    /* Aqui Gemini conservo la logica original del algoritmo, 
+    * que era recorrer verticalmente las celdas. 
+    */
     while (celdaConcepto.getValue() != "") {
       celdaY++;
       celdaConcepto = sheet.getRange(celdaY, startColumn);
