@@ -9,6 +9,8 @@ function getAccountSummaryData() {
   return SheetAPI.getRecords(CONFIG.SHEET_NAMES.MATRIZ);
 }
 
+
+
 /**
  * FUNCIÓN PARA EL FRONTEND
  * Obtiene y procesa las reglas de automatización para el frontend.
@@ -50,45 +52,10 @@ function addTransaction(data) {
     data.concepto,
     data.cantidad
   ];
-
-
-  console.log("Hoja: " + hoja);
-  console.log("Terjet/Columna: " + targetColumn);
-  console.log("grabación: ",record);
   
   // 5. Llamamos a la nueva función de SheetAPI
   writeToNextEmptyRow(hoja, targetColumn, record);
 }
-
-
-function prueba(){
-  const hj = "INVERSIONES";
-  const ct = "Fondo de Inversion";
-  const obj = {
-    hoja: hj,
-    cartera: ct,
-    tipo: "Ingreso",
-    concepto: "APROBADO POR CHAYYANE INGRESO",
-    cantidad: 100
-  }
-  const obj2 = {
-    hoja: hj,
-    cartera: ct,
-    tipo: "Egreso",
-    concepto: "APROBADO POR CHAYYANE EGRESO",
-    cantidad: 100
-  }
-  addTransaction(obj);
-  addTransaction(obj2);
-}
-
-
-
-
-
-
-
-
 
 
 

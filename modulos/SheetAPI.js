@@ -11,16 +11,23 @@ const libro = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
  */
 function getRecords(sheetName) {
   try {
+    // Intenta obtener la hoja
+    var data;
     const sheet = libro.getSheetByName(sheetName);
     if (!sheet) {
       throw new Error(`La hoja "${sheetName}" no fue encontrada.`);
     }
-    return sheet.getDataRange().getValues();
+    console.log(`Leyendo los datos de la hoja "${sheetName}"...`);
+ 
+    data = sheet.getDataRange().getValues();
+    console.log(data);
+    return data;
   } catch (error) {
     console.error(`Error al leer la hoja "${sheetName}": ${error}`);
     return []; // Devuelve un arreglo vacío en caso de error.
   }
 }
+
 
 /**
  * Escribe en un bloque de 3 columnas (Concepto, Cantidad, Fecha)
@@ -60,3 +67,9 @@ function writeToNextEmptyRow(sheetName, startColumn, record) {
   }
 }
 
+function pruebaLecturaDatos(){
+  getRecords("Entradas");
+  getRecords("Gustos");
+  getRecords("Gastos");
+  getRecords("Inversiones");
+}
