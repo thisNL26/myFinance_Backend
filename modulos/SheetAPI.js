@@ -66,10 +66,3 @@ function writeToNextEmptyRow(sheetName, startColumn, record) {
     console.error(`Error al escribir en bloque en la hoja "${sheetName}": ${error}`);
   }
 }
-
-function pruebaLecturaDatos(){
-  getRecords("Entradas");
-  getRecords("Gustos");
-  getRecords("Gastos");
-  getRecords("Inversiones");
-}

@@ -7,6 +7,7 @@
  * @returns {Object} Un objeto donde cada llave es el nombre de una automatización y su valor es la regla.
  */
 function processAutomationRules(automationData) {
+
   const rules = {};
   const filteredData = automationData.map(row => row.filter(cell => cell !== ''));
 
@@ -30,6 +31,12 @@ function processAutomationRules(automationData) {
       };
     }
   });
-  
+  console.log(rules);
   return rules;
 }
+
+
+function probarAD(){
+  const dt = getRecords(CONFIG.SHEET_NAMES.AUTOMATIZACIONES);
+  processAutomationRules(dt);
+};

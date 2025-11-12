@@ -38,3 +38,26 @@ const CONFIG = {
     "Egreso": 3
   }
 };
+
+/**
+ * Genera una lista única de todos los nombres de carteras (Bancos/Cuentas)
+ * definidos en CONFIG.WALLET_INDEX.
+ * @returns {string[]} Un array de nombres únicos, ej: ["Efectivo", "BBVA", "NU", ...]
+ */
+
+function getUniqueWalletNames() {
+  
+  // 1. Obtiene todos los objetos de carteras (ej: { "Efectivo": 0, "BBVA": 6 }, etc.)
+  const allWalletGroups = Object.values(CONFIG.WALLET_INDEX);
+  
+  // 2. Obtiene las llaves (nombres) de cada grupo y las "aplana" en un solo array
+  // Resultado: ["Efectivo", "BBVA", "Efectivo", "NU", "BBVA BLUE", ...]
+  const allWalletNames = allWalletGroups.map(group => Object.keys(group)).flat();
+  
+  // 3. Usa un "Set" para eliminar duplicados y lo convierte de nuevo a un array
+  const uniqueNames = [...new Set(allWalletNames)];
+  
+
+  console.log(uniqueNames);
+  return uniqueNames;
+}
