@@ -11,11 +11,11 @@ const CONFIG = {
   },
   WALLET_INDEX:{
     ENTRADAS:{
-      "Efectivo": 0,
+      "Efectivo Entrante": 0,
       "BBVA": 6
     },
     GASTOS:{
-      "Efectivo": 0,
+      "Efectivo Gatos": 0,
       "NU": 6,
       "BBVA BLUE": 12,
       "Coppel": 18,
@@ -23,12 +23,12 @@ const CONFIG = {
       "Cuenta miSaldo": 30
     },
     GUSTOS:{
-      "Efectivo": 0,
-      "Open Bank": 6,
+      "Efectivo Gustos": 0,
+      "OpenBank": 6,
       "CA": 12
     },
     INVERSIONES:{
-      "Efectivo":0,
+      "Efectivo Inversiones":0,
       "Mercado Pago":6,
       "Fondo de Inversion":12
     }

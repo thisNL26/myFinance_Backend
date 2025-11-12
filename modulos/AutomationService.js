@@ -56,7 +56,46 @@ function processAutomationRules(automationData) {
   return rules;
 }
 
-function probarAD(){
-  const dt = getRecords(CONFIG.SHEET_NAMES.AUTOMATIZACIONES);
-  processAutomationRules(dt);
-};
+
+
+
+
+/**
+ * AYUDANTE 1:
+ * Busca en la CONFIGURACIÓN en qué "hoja" vive una "cartera".
+ * Ej: _findHojaForCartera("NU") devuelve "GASTOS"
+ */
+function _findHojaForCartera(carteraName) {
+  for (const hojaName in CONFIG.WALLET_INDEX) {
+    if (CONFIG.WALLET_INDEX[hojaName][carteraName] !== undefined) {
+      return hojaName; // Devuelve el NOMBRE de la hoja (ej. "GASTOS")
+    }
+  }
+  return null; // No se encontró
+}
+
+/**
+ * AYUDANTE 2:
+ * Interpreta el valor de "cantidad" de una regla.
+ * @param {string | number} ruleAmount - El valor de la regla (ej. "x", 100, 95)
+ * @param {number} userInputAmount - El valor que el usuario escribió (el valor de "x")
+ * @returns {number} La cantidad final calculada.
+ */
+function _calculateAmount(ruleAmount, userInputAmount) {
+  
+  // Si la regla es 'x' (minúscula) o 'X' (mayúscula)
+  if (typeof ruleAmount === 'string' && ruleAmount.toLowerCase() === 'x') {
+    return userInputAmount;
+  }
+  
+  // Si la regla es un número (como 95 o 5)
+  if (typeof ruleAmount === 'number') {
+    return ruleAmount;
+  }
+  
+  // --- AÑADE MÁS LÓGICA AQUÍ SI LA NECESITAS ---
+  // Ej: if (ruleAmount === "(X*1.15)") { return userInputAmount * 1.15; }
+  
+  // Si no se reconoce, devuelve el valor original o 0
+  return ruleAmount; 
+}
