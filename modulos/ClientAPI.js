@@ -1,12 +1,12 @@
-// Archivo: ClientAPI.gs
-
 /**
  * FUNCIÓN PARA EL FRONTEND
- * Obtiene los datos de las cuentas para mostrar en el resumen.
- * @returns {Array<Array<any>>} Los datos de la hoja matriz.
+ * Obtiene y procesa las reglas de automatización para el frontend.
+ * @returns {Object} El objeto de reglas de automatización listo para usar.
  */
-function getAccountSummaryData() {
-  return getRecords(CONFIG.SHEET_NAMES.MATRIZ);
+
+function getAutomationRules() {
+  const automationData = getRecords(CONFIG.SHEET_NAMES.AUTOMATIZACIONES);
+  return processAutomationRules(automationData);
 }
 
 /**
