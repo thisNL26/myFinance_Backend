@@ -6,7 +6,7 @@
  * @returns {Array<Array<any>>} Los datos de la hoja matriz.
  */
 function getAccountSummaryData() {
-  return SheetAPI.getRecords(CONFIG.SHEET_NAMES.MATRIZ);
+  return getRecords(CONFIG.SHEET_NAMES.MATRIZ);
 }
 
 /**
@@ -14,9 +14,30 @@ function getAccountSummaryData() {
  * Obtiene y procesa las reglas de automatización para el frontend.
  * @returns {Object} El objeto de reglas de automatización listo para usar.
  */
-function getAutomationRules() {
-  const automationData = getRecords(CONFIG.SHEET_NAMES.AUTOMATIZACIONES);
-  return processAutomationRules(automationData);
+function getAccountSummaryData() {
+  console.log('Leyendo los datos de la hoja "matriz"...');
+  
+  // 1. Obtiene los datos "feos"
+  const data = getRecords(CONFIG.SHEET_NAMES.MATRIZ);
+
+  // 2. Itera sobre cada fila y cada celda para limpiarlas
+  const formattedData = data.map(row => {
+    
+    return row.map(cell => {
+      // Si la celda es un NÚMERO...
+      if (typeof cell === 'number') {
+        // ¡Aplica la magia!
+        return Math.round(cell * 100) / 100;
+      }
+      // Si no es un número (ej. "BBVA"), déjalo como está
+      return cell;
+    });
+    
+  });
+  
+  // 3. Devuelve los datos limpios
+  console.log(formattedData); // ¡Ahora el console.log se verá bonito!
+  return formattedData;
 }
 
 /**
@@ -26,17 +47,18 @@ function getAutomationRules() {
 function addTransaction(data) {
   // 1. Obtenemos el "diccionario" de reglas
   const rules = getAutomationRules();
-
+  
   // 2. ¡EL VALIDADOR!
   // Verificamos si existe una regla para esta Cartera Y este Concepto
   // Esta es tu "comprobación de coincidencia", pero sin un bucle 'for'
   const ruleSteps =
-    rules[data.cartera] && rules[data.cartera][data.concepto]
-      ? rules[data.cartera][data.concepto]
-      : null;
-
+  rules[data.cartera] && rules[data.cartera][data.concepto]
+  ? rules[data.cartera][data.concepto]
+  : null;
+  
   // 3. El IF/ELSE que propusiste
   if (ruleSteps) {
+
     // -------------------------------------------
     // CASO SÍ: Es una Automatización
     // -------------------------------------------
@@ -96,6 +118,8 @@ function addTransaction(data) {
 
 
 
+// Siempre que haga match con una automatizacion, los campos concepto, tipo y cantidad (si en automatizacion no esta en x) los va a descartar
+
 function probarTransaccion(){
   const dataSimple = {
     hoja: "ENTRADAS",       // El nombre de la HOJA (de Config.gs)
@@ -106,4 +130,3 @@ function probarTransaccion(){
   };
   addTransaction(dataSimple);
 }
-

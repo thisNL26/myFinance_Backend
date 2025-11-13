@@ -20,7 +20,7 @@ function getRecords(sheetName) {
     console.log(`Leyendo los datos de la hoja "${sheetName}"...`);
  
     data = sheet.getDataRange().getValues();
-    console.log(data);
+
     return data;
   } catch (error) {
     console.error(`Error al leer la hoja "${sheetName}": ${error}`);
